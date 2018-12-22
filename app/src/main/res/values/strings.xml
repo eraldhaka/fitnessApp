@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">FitnessApp</string>
+
+
+    <!--Register-->
+
+    <string name="register_title">Welcome, please register your credentials</string>
+    <string name="register_username">Input Username</string>
+    <string name="register_password">Input Password</string>
+    <string name="register_btn_register">Register now!</string>
+    <string name="error_while_registering">Register was not made successfully</string>
+    <string name="success_while_registering">User registered with success</string>
+    <string name="usernameExists">This username is used once</string>
+    <string name="username_field_empty">Please fill username field</string>
+    <string name="password_field_empty">Please fill password field</string>
+
+
+    <!--Login-->
+
+    <string name="login_title">Please insert your credentials</string>
+    <string name="login_username">Input Username</string>
+    <string name="login_password">Input Password</string>
+    <string name="login_text_desc">or</string>
+    <string name="login_btn_login">Login</string>
+    <string name="login_btn_register">Register</string>
+    <string name="incorrect_credentials">Username or Password are incorrect</string>
+    <string name="logged_successfully">You are logged successfully</string>
+</resources>
