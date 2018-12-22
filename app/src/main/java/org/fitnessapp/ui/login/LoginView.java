@@ -7,5 +7,5 @@ public interface LoginView {
 
     void incorrectCredentials();
 
-    void loggedSuccessfully();
+    void loggedSuccessfully(int userId);
 }

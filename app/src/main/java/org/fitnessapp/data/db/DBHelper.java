@@ -16,7 +16,7 @@ import org.fitnessapp.data.db.model.Users;
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME    = "fitness_app_ormlite.db";
-    private static final int    DATABASE_VERSION = 1;
+    private static final int    DATABASE_VERSION = 3;
 
     private Dao<Users, Integer> mUserDao = null;
 

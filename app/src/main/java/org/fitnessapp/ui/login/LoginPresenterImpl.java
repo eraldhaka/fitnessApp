@@ -1,18 +1,15 @@
 package org.fitnessapp.ui.login;
 
-import org.fitnessapp.R;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.util.Util;
-
-import java.util.List;
 
 public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginActivity loginActivity;
     private DatabaseOperationsImp databaseOperations;
 
-    public LoginPresenterImpl(LoginActivity activity) {
+    LoginPresenterImpl(LoginActivity activity) {
         this.loginActivity = activity;
         databaseOperations = new DatabaseOperationsImp(activity);
     }
@@ -23,13 +20,11 @@ public class LoginPresenterImpl implements LoginPresenter {
             if(databaseOperations.checkIfCredentialsAreCorrect(users)){
                 loginActivity.incorrectCredentials();
             }else {
-                loginActivity.loggedSuccessfully();
+                int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
+                loginActivity.loggedSuccessfully(userId);
             }
         }
     }
-
-
-
 
     private Boolean checkUserName(String username) {
         if (Util.checkIfValueIsEmpty(username)) {
@@ -44,19 +39,6 @@ public class LoginPresenterImpl implements LoginPresenter {
             loginActivity.emptyFieldPassword();
             return false;
         }
-        return true;
-    }
-
-    private boolean checkIfCredentialsAreCorrect(String username, String password) {
-
-        List<Users> users =  databaseOperations.read();
-        for(int i=0 ; i<users.size();i++){
-            if(username.equals(users.get(i).getUsername())){
-               // registerActivity.usernameExists();
-                return false;
-            }
-        }
-
         return true;
     }
 }

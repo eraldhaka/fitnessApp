@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.model.Users;
+import org.fitnessapp.ui.main_activity.MainActivity;
 import org.fitnessapp.ui.register.RegisterActivity;
+import org.fitnessapp.util.PrefManager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -67,9 +70,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void loggedSuccessfully() {
+    public void loggedSuccessfully(int userId) {
+        PrefManager.setID(PrefManager.USER_ID, userId);
         Toast.makeText(getApplicationContext(),R.string.logged_successfully,Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this,RegisterActivity.class);
+        initMainActivity();
+    }
+
+    private void initMainActivity() {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }

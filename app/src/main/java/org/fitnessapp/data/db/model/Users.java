@@ -10,8 +10,8 @@ public class Users {
     // Primary key defined as an auto generated integer
     // Database table column name
 
-    @DatabaseField(columnName = "user_id",generatedId = true)
-    public int user_id;
+    @DatabaseField(columnName = "userId",generatedId = true)
+    public int userId;
 
     @DatabaseField(columnName = "username")
     public String username;
@@ -19,14 +19,22 @@ public class Users {
     @DatabaseField(columnName = "password")
     public String password;
 
+    @DatabaseField(columnName = "distance")
+    public float distance;
+
+    @DatabaseField(columnName = "time")
+    public long timeWalk;
+
 
     // Getter and Setter method of fields
-    public int getUser_id() {
-        return user_id;
+
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -43,5 +51,21 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    public long getTimeWalk() {
+        return timeWalk;
+    }
+
+    public void setTimeWalk(long timeWalk) {
+        this.timeWalk = timeWalk;
     }
 }

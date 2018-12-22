@@ -17,7 +17,6 @@ public class DatabaseOperationsImp implements DatabaseOperations{
     public DatabaseOperationsImp(Context contex) {
         helper = new DBHelper(contex);
         userDao = helper.getRuntimeExceptionDao(Users.class);
-
     }
 
     @Override
@@ -122,5 +121,28 @@ public class DatabaseOperationsImp implements DatabaseOperations{
             return false;
         }
         return results.size() == 0;
+    }
+
+
+    public Users queryUserId(String username, String password) {
+        Users results = null;
+        try {
+            //results = userDao.queryBuilder().where().eq("userId",id).query();
+            results = userDao.queryBuilder().where().eq("username",username).and().eq("password",password).queryForFirst();
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public Users users(int id) {
+        Users results = null;
+        try {
+            //results = userDao.queryBuilder().where().eq("userId",id).query();
+            results = userDao.queryBuilder().where().eq("userId",id).queryForFirst();
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
 }

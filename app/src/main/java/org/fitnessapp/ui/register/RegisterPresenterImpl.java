@@ -5,8 +5,6 @@ import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.util.Util;
 
-import java.util.List;
-
 public class RegisterPresenterImpl implements RegisterPresenter {
 
     private RegisterActivity registerActivity;
