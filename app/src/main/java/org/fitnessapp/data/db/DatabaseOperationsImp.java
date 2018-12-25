@@ -123,11 +123,10 @@ public class DatabaseOperationsImp implements DatabaseOperations{
         return results.size() == 0;
     }
 
-
+    @Override
     public Users queryUserId(String username, String password) {
         Users results = null;
         try {
-            //results = userDao.queryBuilder().where().eq("userId",id).query();
             results = userDao.queryBuilder().where().eq("username",username).and().eq("password",password).queryForFirst();
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -135,7 +134,8 @@ public class DatabaseOperationsImp implements DatabaseOperations{
         return results;
     }
 
-    public Users users(int id) {
+    @Override
+    public Users queryUser(int id) {
         Users results = null;
         try {
             //results = userDao.queryBuilder().where().eq("userId",id).query();
@@ -144,5 +144,19 @@ public class DatabaseOperationsImp implements DatabaseOperations{
             e.printStackTrace();
         }
         return results;
+    }
+
+    @Override
+    public void updateData(Users users, float distanceWalked, long timeWalked) {
+
+            UpdateBuilder<Users, Integer> updateBuilder = userDao.updateBuilder();
+            try {
+                updateBuilder.where().eq("userId", users.getUserId());
+                updateBuilder.updateColumnValue("totalDistanceWalked" , distanceWalked);
+                updateBuilder.updateColumnValue("time" , timeWalked);
+                updateBuilder.update();
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
     }
 }

@@ -20,8 +20,11 @@ public class LoginPresenterImpl implements LoginPresenter {
             if(databaseOperations.checkIfCredentialsAreCorrect(users)){
                 loginActivity.incorrectCredentials();
             }else {
-                int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
-                loginActivity.loggedSuccessfully(userId);
+                if(users!=null){
+                    int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
+                    loginActivity.loggedSuccessfully(userId);
+                }
+
             }
         }
     }

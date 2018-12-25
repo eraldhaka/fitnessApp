@@ -25,8 +25,21 @@
     <string name="logged_successfully">You are logged successfully</string>
 
 
-
     <string name="daily_message">Hi %s! Stay healthy</string>
     <string name="daily_distance">%.1f mi</string>
     <string name="daily_time_data">%d min</string>
+    <string name="achievement_title">Achievement</string>
+    <string name="achievement_message">You have %d milestones of 1000 feet. Stay healthy!</string>
+
+    <string name="distance_label">Distance:</string>
+    <string name="time_label">Time:</string>
+    <string name="start_walk">Start Walk</string>
+    <string name="stop_walk">Stop Walk</string>
+
+
+    <string name="notification_message">Go for a walk today.</string>
+    <string name="save_walk_data_title">Walk Activity</string>
+    <string name="save_walk_data_message">Save walk activity data</string>
+    <string name="dismiss_walk_data">Dismiss</string>
+    <string name="save_walk_data">Save</string>
 </resources>

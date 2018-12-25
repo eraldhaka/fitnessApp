@@ -19,11 +19,11 @@ public class Users {
     @DatabaseField(columnName = "password")
     public String password;
 
-    @DatabaseField(columnName = "distance")
-    public float distance;
+    @DatabaseField(columnName = "totalDistanceWalked")
+    public float totalDistanceWalked;
 
     @DatabaseField(columnName = "time")
-    public long timeWalk;
+    public long totalTimeWalked;
 
 
     // Getter and Setter method of fields
@@ -53,19 +53,27 @@ public class Users {
         this.password = password;
     }
 
-    public float getDistance() {
-        return distance;
+    public float getTotalDistanceWalked() {
+        return totalDistanceWalked;
     }
 
-    public void setDistance(float distance) {
-        this.distance = distance;
+    public void setTotalDistanceWalked(float totalDistanceWalked) {
+        this.totalDistanceWalked = totalDistanceWalked;
     }
 
-    public long getTimeWalk() {
-        return timeWalk;
+    public long getTotalTimeWalked() {
+        return totalTimeWalked;
     }
 
-    public void setTimeWalk(long timeWalk) {
-        this.timeWalk = timeWalk;
+    public void setTotalTimeWalked(long totalTimeWalked) {
+        this.totalTimeWalked = totalTimeWalked;
+    }
+
+    public void updateDistanceCovered(float distanceWalked) {
+        this.totalDistanceWalked = this.totalDistanceWalked + distanceWalked;
+    }
+
+    public void updateTotalTimeWalk(long timeWalked) {
+        this.totalTimeWalked = this.totalTimeWalked +timeWalked;
     }
 }

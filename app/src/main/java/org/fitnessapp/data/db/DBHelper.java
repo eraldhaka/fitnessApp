@@ -9,14 +9,10 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import org.fitnessapp.data.db.model.Users;
 
-/**
- * Created by user on 11/14/2017.
- */
-
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME    = "fitness_app_ormlite.db";
-    private static final int    DATABASE_VERSION = 3;
+    private static final int    DATABASE_VERSION = 4;
 
     private Dao<Users, Integer> mUserDao = null;
 
