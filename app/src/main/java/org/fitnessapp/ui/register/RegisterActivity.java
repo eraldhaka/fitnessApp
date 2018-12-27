@@ -8,6 +8,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.model.Users;
+import org.fitnessapp.ui.main_activity.MainActivity;
+import org.fitnessapp.ui.walk_activity.WalkActivity;
+import org.fitnessapp.util.Helper;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
     @Override
     public void showRegisteredSuccessfully(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-        finish();
+        startActivity(Helper.getIntent(this,MainActivity.class));
     }
 
     @Override

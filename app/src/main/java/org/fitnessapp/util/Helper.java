@@ -1,5 +1,6 @@
 package org.fitnessapp.util;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -23,6 +24,10 @@ public class Helper {
     public static final String ACTION_NAME_SPACE = "org.fitnessapp.LocationService";
     public static final String INTENT_EXTRA_RESULT_CODE = "resultCode";
     public static final String INTENT_USER_LAT_LNG = "userLatLng";
+
+    public static boolean checkIfValueIsEmpty(String s) {
+        return s.equalsIgnoreCase("");
+    }
 
     public static AlertDialog displayMessageToUser(Context context, String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -95,15 +100,17 @@ public class Helper {
         int dtHour;
         int dtMin;
         int iAMPM;
+       // int startTime = 9;
+       // int endTime = 18;
         String strAMorPM=null;
         Date dtCurrentDate;
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
         try {
             Date startTime = sdf.parse(strTimeToCompare);
             Date endTime = sdf.parse(endTimeToCompare);
-            dtMin=cal.get(Calendar.MINUTE);
-            dtHour=cal.get(Calendar.HOUR);
-            iAMPM=cal.get(Calendar.AM_PM);
+            dtMin = cal.get(Calendar.MINUTE);
+            dtHour = cal.get(Calendar.HOUR);
+            iAMPM = cal.get(Calendar.AM_PM);
             if (iAMPM == 1) {
                 strAMorPM="PM";
             }
@@ -125,5 +132,19 @@ public class Helper {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static Date getDate(){
+
+        Date c = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+        Date myDate = null;
+        try {
+             myDate = df.parse(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return myDate;
     }
 }

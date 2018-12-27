@@ -1,4 +1,4 @@
-package org.fitnessapp.ui.loaderboard;
+package org.fitnessapp.ui.leaderboard;
 
 public interface LeaderboardPresenter {
 

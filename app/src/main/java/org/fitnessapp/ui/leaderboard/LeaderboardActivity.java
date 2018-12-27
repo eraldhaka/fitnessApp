@@ -1,4 +1,4 @@
-package org.fitnessapp.ui.loaderboard;
+package org.fitnessapp.ui.leaderboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +39,7 @@ public class LeaderboardActivity extends AppCompatActivity implements Leaderboar
         Collections.sort(users, new Comparator<Users>() {
             @Override
             public int compare(Users lhs, Users rhs) {
-                return Float.compare(rhs.getTotalTimeWalked(), lhs.getTotalTimeWalked());
+                return Float.compare(rhs.getTotalDistanceWalked(), lhs.getTotalDistanceWalked());
             }
         });
 

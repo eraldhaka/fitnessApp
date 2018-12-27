@@ -1,8 +1,19 @@
 package org.fitnessapp.ui.login;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.parse.twitter.ParseTwitterUtils;
+
+import org.fitnessapp.R;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
-import org.fitnessapp.util.Util;
+import org.fitnessapp.util.Helper;
+import org.fitnessapp.util.PrefManager;
 
 public class LoginPresenterImpl implements LoginPresenter {
 
@@ -20,17 +31,56 @@ public class LoginPresenterImpl implements LoginPresenter {
             if(databaseOperations.checkIfCredentialsAreCorrect(users)){
                 loginActivity.incorrectCredentials();
             }else {
-                if(users!=null){
-                    int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
-                    loginActivity.loggedSuccessfully(userId);
-                }
-
+                int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
+                PrefManager.setID(PrefManager.USER_ID, userId);
+                loginActivity.loggedSuccessfully();
             }
         }
     }
 
+    @Override
+    public void twitterLogin() {
+
+            ParseTwitterUtils.logIn(loginActivity, new LogInCallback() {
+
+                @Override
+                public void done(final ParseUser user, ParseException err) {
+                    if (err != null) {
+                        ParseUser.logOut();
+                    }
+                    if (user == null) {
+                        ParseUser.logOut();
+                    } else if (user.isNew()) {
+                        user.setUsername(ParseTwitterUtils.getTwitter().getScreenName());
+                        user.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (null == e) {
+                                    registerinLocalDatabase(user);
+                                } else {
+                                    ParseUser.logOut();
+                                    loginActivity.showErrorAuthenicatedWithTwitter();
+                                }
+                            }
+                        });
+                    } else {
+                        if(databaseOperations.queryUserId(user.getUsername(),user.getUsername())!=null){
+                            //have used username as pass filled as well
+                            int userId = databaseOperations.queryUserId(user.getUsername(),user.getUsername()).getUserId();
+                            PrefManager.setID(PrefManager.USER_ID, userId);
+                            loginActivity.loggedSuccessfully();
+                        }else {
+                            registerinLocalDatabase(user);
+                        }
+
+                    }
+                }
+            });
+
+    }
+
     private Boolean checkUserName(String username) {
-        if (Util.checkIfValueIsEmpty(username)) {
+        if (Helper.checkIfValueIsEmpty(username)) {
             loginActivity.emptyFieldUsername();
             return false;
         }
@@ -38,10 +88,26 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     private Boolean checkPassword(String password) {
-        if (Util.checkIfValueIsEmpty(password)) {
+        if (Helper.checkIfValueIsEmpty(password)) {
             loginActivity.emptyFieldPassword();
             return false;
         }
         return true;
+    }
+
+
+    private void registerinLocalDatabase(ParseUser user){
+
+        if(databaseOperations.checkIfUserNameExist(user.getUsername())){
+            Users users = new Users();
+            users.setUsername(user.getUsername());
+            //have used username as pass filled as well
+            users.setPassword(user.getUsername());
+            if(databaseOperations.create(users)){
+                int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
+                PrefManager.setID(PrefManager.USER_ID, userId);
+                loginActivity.showAuthenicatedSuccessfullyWithTwitter();
+            }
+        }
     }
 }

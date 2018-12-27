@@ -7,5 +7,9 @@ public interface LoginView {
 
     void incorrectCredentials();
 
-    void loggedSuccessfully(int userId);
+    void loggedSuccessfully();
+
+    void showAuthenicatedSuccessfullyWithTwitter();
+
+    void showErrorAuthenicatedWithTwitter();
 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 public class PrefManager {
 
+    // The default result for the user logged out equal 1
     public static final int USER_LOGGED_OUT = -1;
     public static final String USER_ID = "user_id";
     public static final String USER_WALK = "user_walk";
@@ -13,7 +14,7 @@ public class PrefManager {
     private static SharedPreferences sharedPreferences;
 
     public static void initSharedPref(Context context) {
-        sharedPreferences = context.getSharedPreferences("auth_hpi_fitness", Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("auth_app_fitness", Context.MODE_PRIVATE);
     }
 
     private static SharedPreferences getAuthCredentials() {

@@ -4,7 +4,7 @@
     package="org.fitnessapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -21,6 +21,7 @@
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.main_activity.MainActivity" />
         <activity android:name=".ui.walk_activity.WalkActivity" />
+        <activity android:name=".ui.leaderboard.LeaderboardActivity"/>
         <activity android:name=".ui.dispatch.DispatchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,11 +30,20 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".util.notifications.NotificationBroadcaster" />
-
         <service android:name=".util.service.LocationService" />
 
-        <activity android:name=".ui.loaderboard.LeaderboardActivity"></activity>
+        <receiver android:name=".util.notifications.NotificationBroadcaster" />
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="@string/back4app_server_url" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/back4app_app_id" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/back4app_client_key" />
+
     </application>
 
 </manifest>

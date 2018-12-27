@@ -28,7 +28,6 @@ public class Users {
 
     // Getter and Setter method of fields
 
-
     public int getUserId() {
         return userId;
     }

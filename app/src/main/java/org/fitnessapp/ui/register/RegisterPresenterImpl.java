@@ -3,7 +3,8 @@ package org.fitnessapp.ui.register;
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
-import org.fitnessapp.util.Util;
+import org.fitnessapp.util.Helper;
+import org.fitnessapp.util.PrefManager;
 
 public class RegisterPresenterImpl implements RegisterPresenter {
 
@@ -18,8 +19,10 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     @Override
     public void registerUser(Users users) {
         if(checkUserName(users.getUsername()) && checkPassword(users.getPassword())){
-            if(databaseOperations.checkIfUserNameExist(users)){
+            if(databaseOperations.checkIfUserNameExist(users.getUsername())){
                 if(databaseOperations.create(users)){
+                    int userId = databaseOperations.queryUserId(users.getUsername(),users.getPassword()).getUserId();
+                    PrefManager.setID(PrefManager.USER_ID, userId);
                     registerActivity.showRegisteredSuccessfully(registerActivity.getString(R.string.success_while_registering));
                 }else{
                     registerActivity.showError(registerActivity.getString(R.string.error_while_registering));
@@ -31,7 +34,7 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     }
 
     private Boolean checkUserName(String username) {
-        if (Util.checkIfValueIsEmpty(username)) {
+        if (Helper.checkIfValueIsEmpty(username)) {
             registerActivity.emptyFieldUsername();
             return false;
         }
@@ -39,7 +42,7 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     }
 
     private Boolean checkPassword(String password) {
-        if (Util.checkIfValueIsEmpty(password)) {
+        if (Helper.checkIfValueIsEmpty(password)) {
             registerActivity.emptyFieldPassword();
             return false;
         }

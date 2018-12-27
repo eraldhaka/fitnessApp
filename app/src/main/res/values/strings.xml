@@ -42,4 +42,19 @@
     <string name="save_walk_data_message">Save walk activity data</string>
     <string name="dismiss_walk_data">Dismiss</string>
     <string name="save_walk_data">Save</string>
+
+
+    <string name="permission_denied">Permission denied to access location</string>
+
+
+    <!--Twitter Impl-->
+    <string name="twitter_consumer_key">E3pIOfBTiIkuKoCJ6KfBMM56k</string>
+    <string name="twitter_consumer_secret">gahoG5q4NbH1c6c45kbbbccLJLMaEv2rIhkhKq0WxpznnMojeQ</string>
+    <string name="twitter_error_response">Error during Authentication</string>
+
+    <!--back4app is used for authentication-->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">uU6iYrVq08rZFvYujFvSnmmWhi3Ckpn4gvvluUwr</string>
+    <string name="back4app_client_key">xFjj2JrsDXVoEnk20ClN2pkxd7jVFuf8NrNeFJAa</string>
+
 </resources>

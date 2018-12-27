@@ -47,7 +47,7 @@ public class NotificationBroadcaster extends BroadcastReceiver {
     }
 
     void launchActivity(Context context,Intent intent){
-        if(Helper.CompareTime("9:00 AM","18:00 PM")){
+        if(Helper.CompareTime("9:00 AM","06:00 PM")){
             NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = intent.getParcelableExtra(NOTIFICATION_KEY);
             int id = intent.getIntExtra(NOTIFICATION_ID, 0);
