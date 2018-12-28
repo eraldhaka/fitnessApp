@@ -7,7 +7,7 @@ import org.fitnessapp.ui.main_activity.MainActivity;
 import org.fitnessapp.ui.login.LoginActivity;
 import org.fitnessapp.ui.walk_activity.WalkActivity;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
+import org.fitnessapp.data.prefs.PrefManager;
 
 public class DispatchActivity extends AppCompatActivity {
 

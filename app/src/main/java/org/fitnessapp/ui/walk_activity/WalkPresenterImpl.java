@@ -4,7 +4,7 @@ import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.UserWalks;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
+import org.fitnessapp.data.prefs.PrefManager;
 import java.util.Date;
 
 public class WalkPresenterImpl implements WalkPresenter {

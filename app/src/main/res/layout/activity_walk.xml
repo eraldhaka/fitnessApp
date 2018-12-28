@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginBottom="@dimen/margin_16dp"
-        android:text="Distance: "
+        android:text="@string/distance_label"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent" />
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8dp"
         android:layout_marginBottom="@dimen/margin_16dp"
-        android:text="0.0 mi"
+        android:text="@string/walking_distance_label"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toEndOf="@+id/textView3" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
-        android:text="Time: "
+        android:text="@string/time_label"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8dp"
         android:layout_marginTop="@dimen/margin_16dp"
-        android:text="0:0:0"
+        android:text="@string/walking_time_label"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
@@ -60,9 +60,9 @@
         android:id="@+id/button_walk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Start walking"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:text="@string/walk_activity_start_walk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

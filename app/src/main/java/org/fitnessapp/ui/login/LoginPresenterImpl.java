@@ -1,19 +1,14 @@
 package org.fitnessapp.ui.login;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.twitter.ParseTwitterUtils;
-
-import org.fitnessapp.R;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
+import org.fitnessapp.data.prefs.PrefManager;
 
 public class LoginPresenterImpl implements LoginPresenter {
 
@@ -97,7 +92,6 @@ public class LoginPresenterImpl implements LoginPresenter {
 
 
     private void registerinLocalDatabase(ParseUser user){
-
         if(databaseOperations.checkIfUserNameExist(user.getUsername())){
             Users users = new Users();
             users.setUsername(user.getUsername());

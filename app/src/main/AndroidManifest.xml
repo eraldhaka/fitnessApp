@@ -30,9 +30,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".util.service.LocationService" />
-
-        <receiver android:name=".util.notifications.NotificationBroadcaster" />
+        <service android:name=".service.LocationService" />
+        <receiver android:name=".notifications.NotificationBroadcaster" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"

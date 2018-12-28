@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,29 +9,37 @@
         android:id="@+id/text_view_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="Username"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/leaderboard_username"
+        app:layout_constraintStart_toEndOf="@+id/text_view_rank_position"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_distance_walked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Distance"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/leaderboard_distance"
+        app:layout_constraintStart_toStartOf="@+id/text_view_username"
         app:layout_constraintTop_toBottomOf="@+id/text_view_username" />
 
     <TextView
         android:id="@+id/text_view_time_walked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Time"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/leaderboard_time"
+        app:layout_constraintStart_toStartOf="@+id/text_view_distance_walked"
         app:layout_constraintTop_toBottomOf="@+id/text_view_distance_walked" />
+
+    <TextView
+        android:id="@+id/text_view_rank_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/leaderboard_rank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_username" />
 </android.support.constraint.ConstraintLayout>

@@ -2,7 +2,6 @@
     <string name="app_name">FitnessApp</string>
     <string name="menu_logout">Log Out</string>
 
-
     <!--Register-->
     <string name="register_title">Welcome, please register your credentials</string>
     <string name="register_username">Input Username</string>
@@ -24,18 +23,31 @@
     <string name="incorrect_credentials">Username or Password are incorrect</string>
     <string name="logged_successfully">You are logged successfully</string>
 
-
     <string name="daily_message">Hi %s! Stay healthy</string>
     <string name="daily_distance">%.1f mi</string>
     <string name="daily_time_data">%d min</string>
     <string name="achievement_title">Achievement</string>
     <string name="achievement_message">You have %d milestones of 1000 feet. Stay healthy!</string>
+    <string name="main_activity_leaderboard">LeaderBoard</string>
+    <string name="main_activity_start_walk">Let\'s start walking</string>
+
+    <string name="walk_activity_start_walk">Start walking</string>
 
     <string name="distance_label">Distance:</string>
     <string name="time_label">Time:</string>
+    <string name="total_time_label">Total Time:</string>
     <string name="start_walk">Start Walk</string>
     <string name="stop_walk">Stop Walk</string>
 
+    <string name="daily_distance_label">0.0 mi</string>
+    <string name="daily_time_data_label">0 min</string>
+    <string name="walking_distance_label">0.0 mi</string>
+    <string name="walking_time_label">0:0:0</string>
+
+    <string name="leaderboard_username">Username: %s!</string>
+    <string name="leaderboard_distance">Distance: %.1f mi </string>
+    <string name="leaderboard_time">Time: %d min </string>
+    <string name="leaderboard_rank"> 1 </string>
 
     <string name="notification_message">Go for a walk today.</string>
     <string name="save_walk_data_title">Walk Activity</string>
@@ -43,9 +55,7 @@
     <string name="dismiss_walk_data">Dismiss</string>
     <string name="save_walk_data">Save</string>
 
-
     <string name="permission_denied">Permission denied to access location</string>
-
 
     <!--Twitter Impl-->
     <string name="twitter_consumer_key">E3pIOfBTiIkuKoCJ6KfBMM56k</string>

@@ -2,16 +2,14 @@ package org.fitnessapp.ui.leaderboard;
 
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
-
 import java.util.List;
 
 public class LeaderboardPresenterImpl implements LeaderboardPresenter {
 
-
     private LeaderboardActivity leaderboardActivity;
     private DatabaseOperationsImp databaseOperations;
 
-    public LeaderboardPresenterImpl(LeaderboardActivity activity) {
+     LeaderboardPresenterImpl(LeaderboardActivity activity) {
         this.leaderboardActivity = activity;
         databaseOperations = new DatabaseOperationsImp(activity);
     }
@@ -20,7 +18,7 @@ public class LeaderboardPresenterImpl implements LeaderboardPresenter {
     @Override
     public void getAllUsersWalkingHistory() {
         List<Users> users = databaseOperations.read();
-        leaderboardActivity.showUsersLoaderboard(users);
+        leaderboardActivity.showUsersLeaderboard(users);
 
     }
 }

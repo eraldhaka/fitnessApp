@@ -4,10 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.model.Users;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +32,7 @@ public class LeaderboardActivity extends AppCompatActivity implements Leaderboar
     }
 
     @Override
-    public void showUsersLoaderboard(List<Users> users) {
+    public void showUsersLeaderboard(List<Users> users) {
 
         Collections.sort(users, new Comparator<Users>() {
             @Override

@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,44 +18,54 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.parse.ParseUser;
+
 import org.fitnessapp.R;
 import org.fitnessapp.ui.dispatch.DispatchActivity;
 import org.fitnessapp.ui.leaderboard.LeaderboardActivity;
 import org.fitnessapp.ui.walk_activity.WalkActivity;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
-import org.fitnessapp.util.notifications.NotificationBroadcaster;
+import org.fitnessapp.data.prefs.PrefManager;
+import org.fitnessapp.notifications.NotificationBroadcaster;
+
 import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static org.fitnessapp.util.PrefManager.USER_LOGGED_OUT;
+import static org.fitnessapp.data.prefs.PrefManager.USER_LOGGED_OUT;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.text_view_title)
-    TextView txt_title;
+    TextView txtTitle;
     @BindView(R.id.text_view_distance_walked)
-    TextView txt_distance_walked;
+    TextView txtDistanceWalked;
     @BindView(R.id.text_view_time_walked)
-    TextView txt_time_walked;
+    TextView txtTimeWalked;
     @BindView(R.id.button_walk)
-    Button btn_walk;
+    Button btnWalk;
     @BindView(R.id.button_leaderboard)
-    Button btn_leaderboard;
+    Button btnLeaderboard;
+
+    MainPresenterImpl mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MainPresenterImpl mainPresenter = new MainPresenterImpl(this);
+        mainPresenter = new MainPresenterImpl(this);
         mainPresenter.showDailyStats();
+
     }
 
-    @Override
+        @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -107,15 +118,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showDailyStats(String username, float distance, long timeWalk) {
-
-        String message = String.format(getString(R.string.daily_message), username);
+    public void showDailyStats(float distance, long timeWalk) {
         String dailyDist = String.format(getString(R.string.daily_distance), Helper.meterToMileConverter(distance));
         String dailyTime = String.format(getString(R.string.daily_time_data), Helper.secondToMinuteConverter(timeWalk));
 
-        txt_title.setText(message);
-        txt_distance_walked.setText(dailyDist);
-        txt_time_walked.setText(dailyTime);
+        txtDistanceWalked.setText(dailyDist);
+        txtTimeWalked.setText(dailyTime);
     }
 
     @Override
@@ -132,6 +140,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         // Reminder every 1 hour
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_HOUR, pendingIntent);
+    }
+
+    @Override
+    public void showUsername(String username) {
+        String message = String.format(getString(R.string.daily_message), username);
+        txtTitle.setText(message);
     }
 
     @NonNull

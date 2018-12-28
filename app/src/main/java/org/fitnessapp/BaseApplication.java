@@ -7,7 +7,7 @@ import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.twitter.ParseTwitterUtils;
 
-import org.fitnessapp.util.PrefManager;
+import org.fitnessapp.data.prefs.PrefManager;
 
 public class BaseApplication extends Application {
     @Override

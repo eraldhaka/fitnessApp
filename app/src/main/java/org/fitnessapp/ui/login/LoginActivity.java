@@ -1,48 +1,35 @@
 package org.fitnessapp.ui.login;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.parse.twitter.ParseTwitterUtils;
-
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.ui.main_activity.MainActivity;
 import org.fitnessapp.ui.register.RegisterActivity;
-import org.fitnessapp.ui.walk_activity.WalkActivity;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static java.lang.System.err;
-
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @BindView(R.id.edit_text_username)
-    EditText edt_username;
+    EditText edtUsername;
     @BindView(R.id.edit_text_password)
-    EditText edt_password;
+    EditText edtPassword;
     @BindView(R.id.button_login)
-    Button btn_login;
+    Button btnLogin;
     @BindView(R.id.button_register)
-    Button btn_register;
+    Button btnRegister;
     @BindView(R.id.button_twitter_login)
-    Button btn_twitter_login;
+    Button btnTwitterLogin;
 
     private Users users;
     private LoginPresenterImpl loginPresenterImpl;
@@ -58,8 +45,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @OnClick(R.id.button_login)
     public void loginUser(View view){
-        users.setUsername(edt_username.getText().toString());
-        users.setPassword(edt_password.getText().toString());
+        users.setUsername(edtUsername.getText().toString());
+        users.setPassword(edtPassword.getText().toString());
         loginPresenterImpl.loginUser(users);
     }
 
@@ -76,12 +63,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void emptyFieldUsername() {
-        edt_username.setError(getString(R.string.username_field_empty));
+        edtUsername.setError(getString(R.string.username_field_empty));
     }
 
     @Override
     public void emptyFieldPassword() {
-        edt_password.setError(getString(R.string.password_field_empty));
+        edtPassword.setError(getString(R.string.password_field_empty));
     }
 
     @Override

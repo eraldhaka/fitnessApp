@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.leaderboard.LeaderboardActivity">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"

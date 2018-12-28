@@ -1,38 +1,86 @@
-package org.fitnessapp.util.service;
+package org.fitnessapp.service;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import org.fitnessapp.util.Constant;
 import org.fitnessapp.util.Helper;
 
-public class LocationService extends Service implements LocationProvider.LocationCallback{
+public class LocationService extends Service{
 
-    //private static final String TAG = Location.class.getSimpleName();
     private static final int NOTIFICATION_ID = 11;
 
-    private LocationProvider mLocationProvider;
     private boolean isUserWalking;
     private Location mCurrentLocation;
     private Location mPreviousLocation;
     private boolean isBroadcastAllow;
     private float mDistanceCovered;
-
     private long startTime;
-
+    LocationCallback mLocationCallback;
     private IBinder mIBinder = new LocalBinder();
+    private  LocationRequest mLocationRequest;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mLocationProvider = new LocationProvider(this, this);
-        mLocationProvider.connect();
         isUserWalking = false;
         startTime = 0;
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)
+                .setFastestInterval(5 * 1000);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationProvider();
+    }
+
+    private void locationProvider(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations, this can be null.
+                if (location != null) {
+                      handleInitialLocation(location);
+                }
+            }
+        });
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    // Update UI with location data
+                    handleNewLocation(location);
+                }
+            }
+        };
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest,mLocationCallback,null /* Looper */);
+
+
     }
 
     @Override
@@ -46,19 +94,16 @@ public class LocationService extends Service implements LocationProvider.Locatio
         return mIBinder;
     }
 
-    @Override
     public void handleInitialLocation(Location location) {
         mCurrentLocation = location;
     }
 
-    @Override
     public void handleNewLocation(Location location) {
         // Getting new location
         mCurrentLocation = location;
         calculateDistance();
         broadCastLocation(mCurrentLocation);
     }
-
     // Assume this algorithm calculates precise totalDistanceWalked
     private void calculateDistance(){
         if(isUserWalking) {
@@ -88,8 +133,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
     @Override
     public void onDestroy() {
         isUserWalking = false;
-        mLocationProvider.disconnect();
-
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
     private void broadCastLocation(Location location) {
@@ -99,9 +143,9 @@ public class LocationService extends Service implements LocationProvider.Locatio
     }
 
     private void broadcastUserLocation(Location location) {
-        Intent in = new Intent(Helper.ACTION_NAME_SPACE);
-        in.putExtra(Helper.INTENT_EXTRA_RESULT_CODE, Activity.RESULT_OK);
-        in.putExtra(Helper.INTENT_USER_LAT_LNG, location);
+        Intent in = new Intent(Constant.ACTION_NAME_SPACE);
+        in.putExtra(Constant.INTENT_EXTRA_RESULT_CODE, Activity.RESULT_OK);
+        in.putExtra(Constant.INTENT_USER_LAT_LNG, location);
         LocalBroadcastManager.getInstance(this).sendBroadcast(in);
     }
 

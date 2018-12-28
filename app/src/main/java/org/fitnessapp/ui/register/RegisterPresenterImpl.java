@@ -4,14 +4,14 @@ import org.fitnessapp.R;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
+import org.fitnessapp.data.prefs.PrefManager;
 
 public class RegisterPresenterImpl implements RegisterPresenter {
 
     private RegisterActivity registerActivity;
     private DatabaseOperationsImp databaseOperations;
 
-    public RegisterPresenterImpl(RegisterActivity activity) {
+     RegisterPresenterImpl(RegisterActivity activity) {
         this.registerActivity = activity;
         databaseOperations = new DatabaseOperationsImp(activity);
     }

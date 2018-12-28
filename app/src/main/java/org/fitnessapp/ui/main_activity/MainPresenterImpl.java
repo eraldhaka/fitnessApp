@@ -3,12 +3,8 @@ package org.fitnessapp.ui.main_activity;
 import org.fitnessapp.data.db.DatabaseOperationsImp;
 import org.fitnessapp.data.db.model.UserWalks;
 import org.fitnessapp.data.db.model.Users;
-import org.fitnessapp.ui.login.LoginActivity;
-import org.fitnessapp.ui.walk_activity.WalkActivity;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
-
-import java.util.List;
+import org.fitnessapp.data.prefs.PrefManager;
 
 public class MainPresenterImpl implements MainPresenter{
 
@@ -26,9 +22,9 @@ public class MainPresenterImpl implements MainPresenter{
         int id = PrefManager.getID(PrefManager.USER_ID);
         Users users = databaseOperations.queryUser(id);
         UserWalks userWalks = databaseOperations.getDailyStats(id,Helper.getDate());
-
-        if(userWalks != null && users!=null){
-            mainActivity.showDailyStats(users.getUsername(),userWalks.getDistanceWalked(),userWalks.getTimeWalked());
+        mainActivity.showUsername(users.getUsername());
+        if(userWalks != null){
+            mainActivity.showDailyStats(userWalks.getDistanceWalked(),userWalks.getTimeWalked());
             // displaying Milestones on total steps but if needed just
             // set --> showAchieveMilestone(userWalks.getDistanceWalked();
             showAchieveMilestone(users.getTotalDistanceWalked());

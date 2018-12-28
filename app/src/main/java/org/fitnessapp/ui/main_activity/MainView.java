@@ -5,7 +5,9 @@ public interface MainView {
 
     void showAchieveMilestone(int numberOfMilestones);
 
-    void showDailyStats(String username, float distance, long timeWalk);
+    void showDailyStats(float distance, long timeWalk);
 
     void scheduleNotification();
+
+    void showUsername(String username);
 }

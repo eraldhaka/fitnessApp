@@ -16,8 +16,8 @@ import android.widget.TextView;
 import org.fitnessapp.R;
 import org.fitnessapp.ui.dispatch.DispatchActivity;
 import org.fitnessapp.util.Helper;
-import org.fitnessapp.util.PrefManager;
-import org.fitnessapp.util.service.LocationService;
+import org.fitnessapp.data.prefs.PrefManager;
+import org.fitnessapp.service.LocationService;
 import java.lang.ref.WeakReference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,11 +28,11 @@ public class WalkActivity extends AppCompatActivity implements WalkView{
     private final static int MSG_UPDATE_TIME = 0;
 
     @BindView(R.id.text_view_distance_walked)
-    TextView txt_distance_walked;
+    TextView txtDistanceWalked;
     @BindView(R.id.text_view_time_walked)
-    TextView txt_time_walked;
+    TextView txtTimeWalked;
     @BindView(R.id.button_walk)
-    Button btn_walk;
+    Button btnWalk;
 
     private LocationService mLocationService;
     private boolean isServiceBound;
@@ -58,6 +58,7 @@ public class WalkActivity extends AppCompatActivity implements WalkView{
             if(mLocationService.isUserWalking()){
                 updateStartWalkUI();
             }
+
         }
 
         @Override
@@ -142,13 +143,13 @@ public class WalkActivity extends AppCompatActivity implements WalkView{
     private void updateStopWalkUI() {
         if(mUIUpdateHandler.hasMessages(MSG_UPDATE_TIME)) {
             mUIUpdateHandler.removeMessages(MSG_UPDATE_TIME);
-            btn_walk.setText(R.string.start_walk);
+            btnWalk.setText(R.string.start_walk);
         }
     }
 
     private void updateStartWalkUI() {
         mUIUpdateHandler.sendEmptyMessage(MSG_UPDATE_TIME);
-        btn_walk.setText(R.string.stop_walk);
+        btnWalk.setText(R.string.stop_walk);
     }
 
     private void startLocationService() {
@@ -164,8 +165,8 @@ public class WalkActivity extends AppCompatActivity implements WalkView{
 
     private void updateUI() {
         if (isServiceBound) {
-            txt_distance_walked.setText(getString(R.string.daily_distance,Helper.meterToMileConverter(mLocationService.distanceCovered())));
-            txt_time_walked.setText(Helper.secondToHHMMSS(mLocationService.elapsedTime()));
+            txtDistanceWalked.setText(getString(R.string.daily_distance,Helper.meterToMileConverter(mLocationService.distanceCovered())));
+            txtTimeWalked.setText(Helper.secondToHHMMSS(mLocationService.elapsedTime()));
         }
     }
 

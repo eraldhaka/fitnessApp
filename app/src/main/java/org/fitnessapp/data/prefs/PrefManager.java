@@ -1,8 +1,7 @@
-package org.fitnessapp.util;
+package org.fitnessapp.data.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
 
 public class PrefManager {
 

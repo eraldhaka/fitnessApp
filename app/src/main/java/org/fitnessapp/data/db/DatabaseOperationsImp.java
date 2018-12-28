@@ -3,12 +3,9 @@ package org.fitnessapp.data.db;
 import android.content.Context;
 import android.database.SQLException;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
-
 import org.fitnessapp.data.db.model.UserWalks;
 import org.fitnessapp.data.db.model.Users;
-
 import java.util.Date;
 import java.util.List;
 

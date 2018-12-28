@@ -9,7 +9,6 @@ import android.widget.Toast;
 import org.fitnessapp.R;
 import org.fitnessapp.data.db.model.Users;
 import org.fitnessapp.ui.main_activity.MainActivity;
-import org.fitnessapp.ui.walk_activity.WalkActivity;
 import org.fitnessapp.util.Helper;
 
 import butterknife.BindView;
@@ -19,11 +18,11 @@ import butterknife.OnClick;
 public class RegisterActivity extends AppCompatActivity implements RegisterView{
 
     @BindView(R.id.edit_text_username)
-    EditText edt_username;
+    EditText edtUsername;
     @BindView(R.id.edit_text_password)
-    EditText edt_password;
+    EditText edtPassword;
     @BindView(R.id.button_register)
-    Button btn_register;
+    Button btnRegister;
 
     private Users users;
     private RegisterPresenterImpl registerPresenterImpl;
@@ -40,20 +39,20 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
 
     @OnClick(R.id.button_register)
     public void registerUser(View view){
-        users.setUsername(edt_username.getText().toString());
-        users.setPassword(edt_password.getText().toString());
+        users.setUsername(edtUsername.getText().toString());
+        users.setPassword(edtPassword.getText().toString());
         registerPresenterImpl.registerUser(users);
 
     }
 
     @Override
     public void emptyFieldUsername() {
-        edt_username.setError(getString(R.string.username_field_empty));
+        edtUsername.setError(getString(R.string.username_field_empty));
     }
 
     @Override
     public void emptyFieldPassword() {
-        edt_password.setError(getString(R.string.password_field_empty));
+        edtPassword.setError(getString(R.string.password_field_empty));
     }
 
     @Override

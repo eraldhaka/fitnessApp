@@ -1,4 +1,4 @@
-package org.fitnessapp.util.notifications;
+package org.fitnessapp.notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,11 +8,11 @@ import android.content.Intent;
 
 import org.fitnessapp.util.Helper;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
+
+import static org.fitnessapp.util.Constant.END_TIME_TO_COMPARE;
+import static org.fitnessapp.util.Constant.START_TIME_TO_COMPARE;
 
 
 public class NotificationBroadcaster extends BroadcastReceiver {
@@ -33,13 +33,13 @@ public class NotificationBroadcaster extends BroadcastReceiver {
 
             case 2: //Monday
                 launchActivity(context,intent);
-            case 3://Monday
+            case 3://Tuesday
                 launchActivity(context,intent);
-            case 4://Monday
+            case 4://Wednesday
                 launchActivity(context,intent);
-            case 5://Monday
+            case 5://Thursday
                 launchActivity(context,intent);
-            case 6://Monday
+            case 6://Friday
                 launchActivity(context,intent);
             case 7: //Saturday
 
@@ -47,7 +47,7 @@ public class NotificationBroadcaster extends BroadcastReceiver {
     }
 
     void launchActivity(Context context,Intent intent){
-        if(Helper.CompareTime("9:00 AM","06:00 PM")){
+        if(Helper.CompareTime(START_TIME_TO_COMPARE,END_TIME_TO_COMPARE)){
             NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = intent.getParcelableExtra(NOTIFICATION_KEY);
             int id = intent.getIntExtra(NOTIFICATION_ID, 0);

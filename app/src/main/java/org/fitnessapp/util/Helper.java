@@ -19,11 +19,17 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-public class Helper {
+import static org.fitnessapp.util.Constant.CHANNEL_ID;
+import static org.fitnessapp.util.Constant.FEET_TO_METER;
+import static org.fitnessapp.util.Constant.ID;
+import static org.fitnessapp.util.Constant.MILE_TO_METER;
+import static org.fitnessapp.util.Constant.MIN_TO_SEC;
+import static org.fitnessapp.util.Constant.NAME;
+import static org.fitnessapp.util.Constant.TIME_FORMAT_12_HOURS;
+import static org.fitnessapp.util.Constant.TIME_FORMAT_AM;
+import static org.fitnessapp.util.Constant.TIME_FORMAT_PM;
 
-    public static final String ACTION_NAME_SPACE = "org.fitnessapp.LocationService";
-    public static final String INTENT_EXTRA_RESULT_CODE = "resultCode";
-    public static final String INTENT_USER_LAT_LNG = "userLatLng";
+public class Helper {
 
     public static boolean checkIfValueIsEmpty(String s) {
         return s.equalsIgnoreCase("");
@@ -45,24 +51,24 @@ public class Helper {
     }
 
     public static int secondToMinuteConverter(long seconds) {
-        return (int) seconds / 60;
+        return (int) seconds / MIN_TO_SEC; // 1 min = 60 sec
     }
 
     public static float meterToMileConverter(float meter) {
-        return meter / 1609;
+        return meter / MILE_TO_METER; // 1 mile = 1609 meter
     }
 
     public static int getNumberOfMilestones(float meter) {
-        return (int) meter / 305; // 1000 feet -> 304.8
+        return (int) meter / FEET_TO_METER; // 1000 feet -> 304.8
     }
 
     public static String secondToHHMMSS(long secondsCount) {
-        long seconds = secondsCount % 60;
+        long seconds = secondsCount % MIN_TO_SEC;
         secondsCount -= seconds;
-        long minutesCount = secondsCount / 60;
-        long minutes = minutesCount % 60;
+        long minutesCount = secondsCount / MIN_TO_SEC;
+        long minutes = minutesCount % MIN_TO_SEC;
         minutesCount -= minutes;
-        long hoursCount = minutesCount / 60;
+        long hoursCount = minutesCount / MIN_TO_SEC;
         return "" + hoursCount + ":" + minutes + ":" + seconds;
     }
 
@@ -72,11 +78,11 @@ public class Helper {
         NotificationCompat.Builder builder;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel notificationChannel = new NotificationChannel("ID", "Name", importance);
+            NotificationChannel notificationChannel = new NotificationChannel(ID, NAME, importance);
             Objects.requireNonNull(notificationManager).createNotificationChannel(notificationChannel);
             builder = new NotificationCompat.Builder(context, notificationChannel.getId());
         } else {
-            builder = new NotificationCompat.Builder(context,"MyChannelId");
+            builder = new NotificationCompat.Builder(context,CHANNEL_ID);
         }
 
         Intent resultIntent = new Intent(context, DispatchActivity.class);
@@ -100,11 +106,9 @@ public class Helper {
         int dtHour;
         int dtMin;
         int iAMPM;
-       // int startTime = 9;
-       // int endTime = 18;
         String strAMorPM=null;
         Date dtCurrentDate;
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT_12_HOURS, Locale.getDefault());
         try {
             Date startTime = sdf.parse(strTimeToCompare);
             Date endTime = sdf.parse(endTimeToCompare);
@@ -112,10 +116,10 @@ public class Helper {
             dtHour = cal.get(Calendar.HOUR);
             iAMPM = cal.get(Calendar.AM_PM);
             if (iAMPM == 1) {
-                strAMorPM="PM";
+                strAMorPM = TIME_FORMAT_PM;
             }
             if (iAMPM == 0) {
-                strAMorPM="AM";
+                strAMorPM = TIME_FORMAT_AM;
             }
             dtCurrentDate = sdf.parse(dtHour + ":" + dtMin + " " + strAMorPM);
             if(dtCurrentDate.after(startTime) && dtCurrentDate.before(endTime)){
